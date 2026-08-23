@@ -8,7 +8,7 @@ const myLibrary = [];
 function renderLibrary(myLibrary){
     myLibrary.forEach(book => {
         createBook(book);
-        
+           
     });
 }
 
@@ -26,18 +26,24 @@ renderLibrary(myLibrary);
 
 function addBookToLibrary(){
 
-    addButton.addEventListener("click", () => {
+    addButton.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
         const title = bookTitleInput.value;
         const subtitle = subTitleInput.value;
         const pages = pagesInput.value;
 
         const bok = new Book(title, subtitle, pages);
-        myLibrary.push(bok);
+        
         createBook(bok);
-        console.log(myLibrary)
+        myLibrary.push(bok);
+        
+        bookTitleInput.value = "";
+        subTitleInput.value = "";
+        pagesInput.value = "";
        
     })
- 
 
 }
 
