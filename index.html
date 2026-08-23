@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="layout-container">
+
+         <div class="main-content">
+        <h1>Book Library</h1>
+         <div class="card-grid">
+
+        <div class="book-card">
+
+            <div class="book-card-title-container">
+                <span id="book-card-pages"></span>
+
+                <div class="book-card-text-container">
+                    <h2 id="book-card-title"></h2>
+                    <h3 class="book-card-subtitle"></h3>
+                </div>
+                
+            </div>
+            
+            
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <aside class="sidebar">
+        <h2>Lägg till bok</h2>
+
+        <form class="form">
+            <label for="title-input">Bok titel:</label>
+            <input type="text" name="title-input" id="title-input" required>
+
+            <label for="subtitle-input">Undertitel:</label>
+            <input type="text" name="subtitle-input" id="subtitle-input">
+
+            <label for="pages-input">Antal sidor:</label>
+            <input type="number" name="pages-input" id="pages-input" required>
+
+            <div class="button-container__input">
+                <button type="submit" class="add-button">Lägg till</button>
+            </div>
+        </form>
+
+    </aside>
+    
+
+    </div>
+
+</body>
+</html>
