@@ -7,38 +7,28 @@ function Book(title, subtitle, pages) {
     this.id = crypto.randomUUID();
 }
 
-function renderLibrary(){
+function renderLibrary(myLibrary){
     myLibrary.forEach(book => {
-
-        const bookCard = document.querySelector(".book-card");
-        const bookTextCointainer = document.querySelector(".book-card__title-container");
-
-        const bookTitle = document.getElementById("book-card-title");
-        bookTitle.textContent = book.title;
-        bookTextCointainer.appendChild(bookTitle);
-        console.log(bookTitle)
-
-        const subTitle = document.querySelector(".book-card__subtitle");
-        subTitle.textContent = book.subtitle;
-
-        const pages = document.getElementById("book-card-pages");
-        pages.textContent = `${book.pages} sidor`;
+        console.log(book)
+        createBook(book);
+        
     });
 }
 
-renderLibrary();
-
 addBookToLibrary()
+renderLibrary(myLibrary);
+
+
 
 function addBookToLibrary(){
     let book = new Book("Majas testbok", "Detta är ett hårdkodat test", 300)
-    myLibrary.push(book)
-    console.log(myLibrary)
+    let book2 = new Book("Detta är min andra testbok som jag testar", "Denna har jag hårdkodat också bara för att testa, inser nu att jag glömt författare", 560);
+    myLibrary.push(book, book2)
+    
 }
 
 // Kanske går att lägga in ett helt objekt som skapas från constructorn eller en annan funktion?
 function createBook(book){
-   
     const cardGrid = document.querySelector(".card-grid");
     
     const bookCard = document.createElement("div");
@@ -53,18 +43,18 @@ function createBook(book){
     titleContainer.append(pages);
     
 
-    const textContainer = document.querySelector(".book-card-text-container");
+    const textContainer = document.createElement("div");
+    textContainer.classList.add("book-card-text-container")
+    titleContainer.append(textContainer);
+
     const bookTitle = document.createElement("h2");
     bookTitle.classList.add("book-card-title");
-    bookTitle.textContent = book.title
-    titleContainer.appendChild(textContainer);
-    textContainer.appendChild(bookTitle);
-    
+    bookTitle.textContent = book.title   
 
     const subTitle = document.createElement("h3");
     subTitle.classList.add("book-card-subtitle");
     subTitle.textContent = book.subtitle;
-    textContainer.appendChild(subTitle);
+    textContainer.append(bookTitle, subTitle);
 
     const btnContainer = document.createElement("div");
     btnContainer.classList.add("book-card-button-container")
@@ -77,10 +67,8 @@ function createBook(book){
     deleteButton.textContent = "Ta bort";
 
     btnContainer.append(unreadToggle, deleteButton);
-
-   
-    bookCard.append(titleContainer, textContainer, btnContainer)
+    bookCard.append(titleContainer, textContainer, btnContainer);
+    console.log(bookCard)
+    cardGrid.append(bookCard);
 
 }
- let book = new Book("Majas testbok", "Detta är ett hårdkodat test", 300)
-createBook(book)
