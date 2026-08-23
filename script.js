@@ -2,13 +2,15 @@ const bookTitleInput = document.getElementById("title-input");
 const subTitleInput = document.getElementById("subtitle-input");
 const pagesInput = document.getElementById("pages-input");
 const addButton = document.querySelector(".add-button");
+const cardGrid = document.querySelector(".card-grid");
 
 const myLibrary = [];
+
 
 function renderLibrary(myLibrary){
     myLibrary.forEach(book => {
         createBook(book);
-           
+
     });
 }
 
@@ -20,6 +22,7 @@ renderLibrary(myLibrary);
     this.title = title;
     this.subtitle = subtitle;
     this.pages = pages;
+    this.read = false;
     this.id = crypto.randomUUID();
 
 }
@@ -47,13 +50,28 @@ function addBookToLibrary(){
 
 }
 
-// Kanske går att lägga in ett helt objekt som skapas från constructorn eller en annan funktion?
+ cardGrid.addEventListener("click", (e) => {
+        const card = e.target.closest(".book-card");
+        if (!card) return;
+
+        if (e.target.classList.contains("remove")) {
+            card.remove();
+            const index = myLibrary.findIndex(b => b.id === card.dataset.id);
+            myLibrary.splice(index, 1);
+
+        } else if (e.target.classList.contains("read")) {
+            const bok = myLibrary.find(b => b.id === card.dataset.id);
+            bok.read = !bok.read;
+            e.target.textContent = bok.read ? "Läst" : "Oläst";
+        }
+    })
+
 function createBook(book){
-    const cardGrid = document.querySelector(".card-grid");
+    
     
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
-    
+    bookCard.dataset.id = book.id;
     
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("book-card-title-container");
