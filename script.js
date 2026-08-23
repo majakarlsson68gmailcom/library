@@ -1,30 +1,44 @@
-const myLibrary = [];
+const bookTitleInput = document.getElementById("title-input");
+const subTitleInput = document.getElementById("subtitle-input");
+const pagesInput = document.getElementById("pages-input");
+const addButton = document.querySelector(".add-button");
 
-function Book(title, subtitle, pages) {
-    this.title = title;
-    this.subtitle = subtitle;
-    this.pages = pages;
-    this.id = crypto.randomUUID();
-}
+const myLibrary = [];
 
 function renderLibrary(myLibrary){
     myLibrary.forEach(book => {
-        console.log(book)
         createBook(book);
         
     });
 }
 
 addBookToLibrary()
+
 renderLibrary(myLibrary);
 
+  function Book(title, subtitle, pages) {
+    this.title = title;
+    this.subtitle = subtitle;
+    this.pages = pages;
+    this.id = crypto.randomUUID();
 
+}
 
 function addBookToLibrary(){
-    let book = new Book("Majas testbok", "Detta är ett hårdkodat test", 300)
-    let book2 = new Book("Detta är min andra testbok som jag testar", "Denna har jag hårdkodat också bara för att testa, inser nu att jag glömt författare", 560);
-    myLibrary.push(book, book2)
-    
+
+    addButton.addEventListener("click", () => {
+        const title = bookTitleInput.value;
+        const subtitle = subTitleInput.value;
+        const pages = pagesInput.value;
+
+        const bok = new Book(title, subtitle, pages);
+        myLibrary.push(bok);
+        createBook(bok);
+        console.log(myLibrary)
+       
+    })
+ 
+
 }
 
 // Kanske går att lägga in ett helt objekt som skapas från constructorn eller en annan funktion?
@@ -33,7 +47,7 @@ function createBook(book){
     
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
-    cardGrid.append(bookCard);
+    
     
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("book-card-title-container");
@@ -68,7 +82,6 @@ function createBook(book){
 
     btnContainer.append(unreadToggle, deleteButton);
     bookCard.append(titleContainer, textContainer, btnContainer);
-    console.log(bookCard)
     cardGrid.append(bookCard);
 
 }
