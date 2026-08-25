@@ -114,7 +114,7 @@ function createBook(book){
     deleteButton.textContent = "Ta bort";
 
     btnContainer.append(unreadToggle, deleteButton);
-    bookCard.append(titleContainer, textContainer, btnContainer);
+    bookCard.append(titleContainer, btnContainer);
     cardGrid.append(bookCard);
 
 }
