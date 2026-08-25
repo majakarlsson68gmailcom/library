@@ -1,6 +1,7 @@
 const bookTitleInput = document.getElementById("title-input");
 const subTitleInput = document.getElementById("subtitle-input");
 const pagesInput = document.getElementById("pages-input");
+const authorInput = document.getElementById("author-input");
 const addButton = document.querySelector(".add-button");
 const cardGrid = document.querySelector(".card-grid");
 
@@ -18,10 +19,11 @@ addBookToLibrary()
 
 renderLibrary(myLibrary);
 
-  function Book(title, subtitle, pages) {
+  function Book(title, subtitle, pages, author) {
     this.title = title;
     this.subtitle = subtitle;
     this.pages = pages;
+    this.author = author;
     this.read = false;
     this.id = crypto.randomUUID();
 
@@ -36,8 +38,9 @@ function addBookToLibrary(){
         const title = bookTitleInput.value;
         const subtitle = subTitleInput.value;
         const pages = pagesInput.value;
+        const author = authorInput.value;
 
-        const bok = new Book(title, subtitle, pages);
+        const bok = new Book(title, subtitle, pages, author);
         
         createBook(bok);
         myLibrary.push(bok);
@@ -45,6 +48,7 @@ function addBookToLibrary(){
         bookTitleInput.value = "";
         subTitleInput.value = "";
         pagesInput.value = "";
+        authorInput.value = "";
        
     })
 
@@ -93,6 +97,11 @@ function createBook(book){
     subTitle.classList.add("book-card-subtitle");
     subTitle.textContent = book.subtitle;
     textContainer.append(bookTitle, subTitle);
+
+    const author = document.createElement("p");
+    author.classList.add("author");
+    author.textContent = book.author;
+    textContainer.append(author);
 
     const btnContainer = document.createElement("div");
     btnContainer.classList.add("book-card-button-container")
